@@ -58,7 +58,7 @@ public class Main {
             } else {
                 sum += Integer.parseInt(s.toString());
             }
-            if (sum == 0) resultList.add(result);
+            if (sum == TARGET) resultList.add(result);
 
             return;
         }
