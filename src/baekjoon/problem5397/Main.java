@@ -3,6 +3,7 @@ package baekjoon.problem5397;
 import java.io.*;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -15,28 +16,29 @@ public class Main {
             List<Character> L = new LinkedList<>();
             String s = br.readLine();
 
-            int it = 0;
+            ListIterator<Character> it = L.listIterator();
+
             for (int i = 0; i < s.length(); i++) {
                 char c = s.charAt(i);
                 if (c == '<') {
-                    if (it == 0) continue;
-                    it--;
-                }
-                else if (c == '>') {
-                    if (it == L.size()) continue;
-                    it++;
-                }
-                else if (c == '-') {
-                    if (it == 0) continue;
-
-                    L.remove(--it);
-                }
-                else {
-                    L.add(it, c);
+                    if (it.hasPrevious()) {
+                        it.previous();
+                    }
+                } else if (c == '>') {
+                    if (it.hasNext()) {
+                        it.next();
+                    }
+                } else if (c == '-') {
+                    if(it.hasPrevious()) {
+                        it.previous();
+                        it.remove();
+                    }
+                } else {
+                    it.add(c);
                 }
             }
-            for (it = 0; it <L.size(); it++) {
-                bw.write(L.get(it));
+            for (Character c : L) {
+                bw.write(c + "");
             }
             bw.write("\n");
         }
